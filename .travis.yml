@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: dist
+  keep-history: true
+  on:
+    branch: master
+  github-token:
+    secure: LHnvxacfXlOYNzXxZFM39Yk+3ne2EqWr/0EfAuMEDqu1WnQwWCmxihMuq8whAku1V9e0OL+aSfjtMvq+UfXvAQXw1Cyo7Qktl2yhiCyAZ7eqaVQjawEcy2Zdpouza4t2xoaBd7+NugoNs2bdmXMTFYQpC7/532xfjw/63ICwS2C/NqIL5LB7bAjjOELCDX3eEv2psI1AhBTv7nHGM04UNp/cr2FtaIkrmbLQQ6U1oEdrFWz23Bnl4Vul4x+C7LRWv45MI4imWzrvJvpJppmDqR6Cw0bJodwmp00MqtQdJHdr0nnpnCju2y62ZrmitJFBu+T6pTUi6CgHK1wOkAkE5RyBbwjNIjXgiwMbNWcqCJyPQB4YPq3M5b2Imr0CBGztLg8+hawu9ktAjQYdeNuMhYDA5iCFy/oXgifgJIS1X80KVxU4Vzj0qEodxQt3VSARjyKPGcXqY/t1BcOEr8BDt96HZ5rh+7QE7rFyOxeAnfalJrhcA7flf9HszL9LEgLZbWnxncYemH0+3Y0HATVTKROzVJ/ubIDD9r4EdQVs0MyJlb6wQd5dNZYOKnDxlCTjDzc/tHcDs80XjzgVcODNeprWJNdCwXIXXhQc56PjT8w8DMCyxArmKQA+jVjRf4Zg0qr8Eh/sy2l/3K0DIBg+C9DuxQON9RihsLc8cb3ubpo=
+before_script:
+- yarn global add @vue/cli
+script:
+- yarn test
+after_success:
+- yarn deploy
