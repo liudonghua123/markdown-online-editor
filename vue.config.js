@@ -9,8 +9,14 @@ const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const isProductionEnvFlag = process.env.NODE_ENV === 'production'
 
 if (isProductionEnvFlag) {
-  // NOTE: 此处借助 var 变量提升，为简单兼容可用 circleci 跑 CI；
-  var { executablePath } = require('./arya.config.js')
+  try {
+    // NOTE: 此处借助 var 变量提升，为简单兼容可用 circleci 跑 CI；
+    var { executablePath } = require('./arya.config.js')
+    // 修复无法正确设置puppeteer的executablePath
+    process.env.PUPPETEER_EXECUTABLE_PATH = executablePath
+  } catch (error) {
+    console.error(`./arya.config.js file does not exist, use the buildin Chromium`)
+  }
 }
 
 function resolveRealPath(dir) {
